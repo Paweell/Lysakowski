@@ -1,0 +1,280 @@
+﻿<Window x:Class="WPFApp.MainWindow" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ControllingTheTabControlSample" Height="750" Width="950">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Margin="2,5">
+            <Button Name="btnPreviousTab" Click="btnPreviousTab_Click">Prev.</Button>
+            <Button Name="btnNextTab" Click="btnNextTab_Click">Next</Button>
+            
+        </StackPanel>
+        <TabControl Name="Arkusze">
+            <TabItem Header="General" >
+                <Grid>
+                   
+
+                        <StackPanel>
+                            <Menu HorizontalAlignment="Stretch">
+                            <MenuItem Header="Plik">
+                                
+                                    <MenuItem Header="Otwórz" Click="OtworzButton_Click">
+                                        
+                                    </MenuItem>
+                                    <MenuItem Header="Zapisz" Click="ZapiszButton_Click"></MenuItem>
+                                    <Separator/>
+                                    <MenuItem Header="Zamknij" Click="MenuItem_Click">
+                                        
+                                        <MenuItem.Icon>
+                                            <Image Source="C:\Users\Pawel\Documents\Visual Studio 2015\Projects\Odcinek12\Odcinek12\images\ikona_zamknij.jpg" MaxWidth="20" MaxHeight="20"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </MenuItem>
+                               
+                            </Menu>
+
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" >
+
+                                
+                                    <Button  Content="Edytuj" Name="Edytuj1Button"
+                    Margin="15" MinHeight="30" MinWidth="100"
+                    HorizontalAlignment="Left" Click="Edytuj1Button_Click"   />
+
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                                        <Label Content="Wyszukaj ucznia " MinWidth="40" />
+                                        <TextBox Name="WyszukajTextBox"  Width="150" TextChanged="WyszukajTextBox_TextChanged"  />
+                                   
+                                    </StackPanel>
+                                
+                            
+                            </StackPanel> 
+                            <ListView Name="ListView" Margin="5" ItemsSource="{Binding ListaOsob}" >
+                                <ListView.View>
+                                   
+                                    <GridView >
+                                        <GridViewColumn  Header="Status" DisplayMemberBinding="{Binding KimJest}" />
+                                        <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding Imie}" />
+                                        <GridViewColumn Header="Nazwisko"  DisplayMemberBinding="{Binding Nazwisko}"/>
+                                    </GridView>
+                                    
+                                </ListView.View>
+
+                                <ListView.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding KimJest}"/>
+                                            </DataTemplate>
+                                            
+                                        </GroupStyle.HeaderTemplate>
+                                        
+                                    </GroupStyle>
+                                    
+                                </ListView.GroupStyle>
+                                
+                                
+                            </ListView>
+
+                           
+                                
+                                
+                        </StackPanel>
+                        </StackPanel>
+
+
+                   
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Edycja">
+
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <ListView Name="ListView1" Margin="0,6,0,4" ItemsSource="{Binding ListaOsob}" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding KimJest}" />
+                                <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding Imie }" />
+                                <GridViewColumn Header="Nazwisko"  DisplayMemberBinding="{Binding Nazwisko}"/>
+                                <GridViewColumn Header= "Płeć" DisplayMemberBinding="{Binding Plec}"/>
+                                <GridViewColumn Header="Klasa" DisplayMemberBinding="{Binding Klasa}"/>
+                                <GridViewColumn Header= "Narodowość " DisplayMemberBinding="{Binding Narodowosc}"/>
+                                <GridViewColumn Header= "Numer kontaktowy" DisplayMemberBinding="{Binding NrTelefonu}"/>
+                                <GridViewColumn Header="Wykształcenie" DisplayMemberBinding="{Binding Wyksztalcenie}"/>
+                                <GridViewColumn Header="Funkcja" DisplayMemberBinding="{Binding Funkcja}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Column="1" Margin="6,8,4,2" >
+                        <Label Content="Dodaj nową osobę " FontSize="17" HorizontalAlignment="Center" ></Label>
+                        <StackPanel >
+                            <Label Content="Status" />
+                            <ComboBox Name="StatusComboBox" HorizontalAlignment="Left" Width="138" SelectionChanged="StatusComboBox_SelectionChanged" />
+                        </StackPanel>
+                        
+                        <!--<StackPanel Margin="10">
+                            <Label FontWeight="Bold">Wybierz status</Label>
+                            <RadioButton>
+                                <TextBlock Name ="StatusTextBlock" Text="Student" Foreground="Green" />
+                            </RadioButton>
+                            <RadioButton Margin="0,5">
+                                <TextBlock Text="Pracownik" Foreground="Red" />
+                            </RadioButton>
+                        </StackPanel> -->
+
+                        <DockPanel>
+
+                                <GroupBox Header="Wprowadź imię "  >
+                                    <DockPanel>
+                                        <StatusBar DockPanel.Dock="Bottom">
+                                            <TextBlock Name="ImieValidationStatus" />
+                                        </StatusBar>
+                                        <TextBox Name="ImieTextBox"  Width="150"  PreviewTextInput="Imie_PrewiewTextInput" FontWeight="Bold" BorderThickness="0.5" />
+                                    </DockPanel>
+                                </GroupBox>
+                            </DockPanel>
+
+
+                        <DockPanel>
+                            <GroupBox Header="Wprowadź nazwisko "  >
+                            <DockPanel>
+                                <StatusBar DockPanel.Dock="Bottom">
+                                    <TextBlock Name="NazwiskoValidationStatus" />
+                                </StatusBar>
+                                <TextBox Name="NazwiskoTextBox"  Width="150"  PreviewTextInput="Nazwisko_PrewiewTextInput" FontWeight="Bold" BorderThickness="0.5" />
+                            </DockPanel>
+                        </GroupBox>
+                        </DockPanel>
+                        
+
+                        <StackPanel >
+
+                            <Label Content="Plec">
+                                <Label.ToolTip>
+                                    Wybierz płeć ucznia z listy.
+                                </Label.ToolTip>
+                            </Label>
+                            <ComboBox x:Name="PlecComboBox" HorizontalAlignment="Left" Width="138" />
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="Klasa" MinWidth="75">
+                                <Label.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,2">Wybór klasy</TextBlock>
+                                        <TextBlock>
+                                            Pole dotyczy tylko ucznia!!
+                                        </TextBlock>
+                                        <Border BorderBrush="Silver" BorderThickness="0,3,0,0" Margin="0,8" />
+                                        <WrapPanel>
+
+                                            <TextBlock FontSize="11" FontStyle="Italic">
+                                                Jeżeli dokonamy wyboru przy wprowadzaniu nauczyciela,
+                                                <LineBreak />
+                                                pole zostanie zignorowane</TextBlock>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                </Label.ToolTip>
+                            </Label>
+                            <ComboBox Name="KlasaComboBox" HorizontalAlignment="Left" Width="138">
+
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <Label Content="Narodowość" MinWidth="75">
+                                <Label.ToolTip>
+                                    Wybierz narodowość ucznia
+                                </Label.ToolTip>
+                            </Label>
+                            <ComboBox Name="NarodowoscComboBox" HorizontalAlignment="Left" Width="138" IsEditable="True"
+                          TextSearch.TextPath="Content.Children[1].Text" >
+
+                                <ComboBoxItem TextSearch.Text="Polska">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="C:\Users\Pawel\Documents\Visual Studio 2015\Projects\Odcinek12\Odcinek12\images\polska.png" />
+                                        <TextBlock Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"><Run Text="Polska"/></TextBlock>
+                                    </StackPanel>
+                                </ComboBoxItem>
+
+                                <ComboBoxItem TextSearch.Text="Grecja">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="C:\Users\Pawel\Documents\Visual Studio 2015\Projects\Odcinek12\Odcinek12\images\grecja.png" />
+                                        <TextBlock Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"><Run Text="Grecja"/></TextBlock>
+                                    </StackPanel>
+                                </ComboBoxItem>
+
+                                <ComboBoxItem TextSearch.Text="Turcja">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="C:\Users\Pawel\Documents\Visual Studio 2015\Projects\Odcinek12\Odcinek12\images\turcja.png" />
+                                        <TextBlock Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"><Run Text="Turcja"/></TextBlock>
+                                    </StackPanel>
+                                </ComboBoxItem>
+
+                                <ComboBoxItem TextSearch.Text="Włochy">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="C:\Users\Pawel\Documents\Visual Studio 2015\Projects\Odcinek12\Odcinek12\images\wlochy.png" />
+                                        <TextBlock Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"><Run Text="Włochy"/></TextBlock>
+                                    </StackPanel>
+                                </ComboBoxItem>
+
+                                <ComboBoxItem TextSearch.Text="Hiszpania">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="C:\Users\Pawel\Documents\Visual Studio 2015\Projects\Odcinek12\Odcinek12\images\hiszpania.png" />
+                                        <TextBlock Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17"><Run Text="Hiszpania"/></TextBlock>
+                                    </StackPanel>
+
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                        <DockPanel>
+                            <GroupBox Header="Wprowadź numer telefonu" >
+                                <DockPanel>
+                                    <StatusBar DockPanel.Dock="Bottom">
+                                        <TextBlock Name="NumerKontaktowyValidationStatus" />
+                                    </StatusBar>
+                                    <TextBox Name="NumerKontaktowyTextBox"  Width="150" PreviewTextInput="NumerKontaktowy_PrewiewTextInput" FontWeight="Bold" BorderThickness="0.5" />
+                                </DockPanel>
+                            </GroupBox>
+                        </DockPanel>
+                        <StackPanel >
+                            <Label Content="Wykształcenie" />
+                            <ComboBox Name="WyksztalcenieComboBox" HorizontalAlignment="Left" Width="138"  IsEnabled="False"/>
+                        </StackPanel>
+                        <StackPanel >
+                            <Label Content="Funkcja" />
+                            <ComboBox Name="FunkcjaComboBox" HorizontalAlignment="Left" Width="138"  IsEnabled="False"/>
+                        </StackPanel>
+
+                        <Button Name="DodajButton" Content="Dodaj osobę" Margin="0,40,0,0" Click="DodajButton_Click" >
+                            <Button.ToolTip>
+                                Dodaj nową osobę
+                            </Button.ToolTip>
+                        </Button>
+                       <!-- <Button Name="EdytujButton" Content="Edytuj dane">
+                            <Button.ToolTip>
+                                wyboierz ucznia z listy a następnie edytuj dane.
+                            </Button.ToolTip> 
+                        </Button> -->
+                        <Button Name="UsunButton" Content="Usuń osobę" Click="UsunButton_Click">
+                            <Button.ToolTip>
+                                Wybierz  z listy osobę którego chcesz usunąć.
+                            </Button.ToolTip>
+                        </Button>
+
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+
+
+            <!--<TabItem Header="Details" />-->  
+        </TabControl>
+
+    </DockPanel>
+</Window>
